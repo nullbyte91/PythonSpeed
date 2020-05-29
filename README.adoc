@@ -1,0 +1,64 @@
+= PythonSpeed
+:idprefix:
+:idseparator: -
+:sectanchors:
+:sectlinks:
+:sectnumlevels: 6
+:sectnums:
+:toc: macro
+:toclevels: 6
+:toc-title: Table of Contents
+
+toc::[]
+
+== Introduction
+
+List of Python Performance Tuning Tips
+
+== Tips 
+=== List Comprehensions
+```python
+# Find first ten number square value
+square = []
+start = perf_counter()
+for i in range(10):
+    square.append(i * i)
+print("Time:{} seconds".format(perf_counter() - start))
+
+Time:5.261999831418507e-06 seconds
+```
+
+```python
+start = perf_counter()
+square = [i * i for i in range(10)]
+print("Time:{} seconds".format(perf_counter() - start))
+
+Time:3.247000222472707e-06 seconds
+```
+
+=== Vector operations over loops
+```python
+# Find a intersection
+
+a_list = [10,20, 30, 40, 50, 60, 70, 80]
+b_list = [20, 90, 50]
+
+intersect_val = []
+start = perf_counter()
+for a_item in a_list:
+    if a_item in b_list:
+        intersect_val.append(a_item)
+print("Time:{} seconds".format(perf_counter() - start))
+
+Time:2.196000423282385e-06 seconds
+```
+
+```python
+start = perf_counter()
+intersect_val = np.intersect1d(a_list, b_list)
+print("Time:{} seconds".format(perf_counter() - start))
+
+Time:0.024299857999722008 seconds
+```
+
+
